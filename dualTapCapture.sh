@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 if [ $(whoami) != "root" ]; then
     echo "This script must be ran as root"
@@ -27,8 +27,8 @@ do
             ;;
         "Eth1 and Eth2")
             echo "Starting capture on Eth1 and Eth2 ports"
-            sudo tcpdump -v -i eth0 -XX -w eth0Capture.pcap &
-            sudo tcpdump -v -i eth1 -XX -w eth1Capture.pcap &
+            sudo tcpdump -v -i eth1 -XX -w eth0Capture.pcap &
+            sudo tcpdump -v -i eth2 -XX -w eth1Capture.pcap &
             wait
             sudo mergecap -w mergedCapture.pcap eth*.pcap
             break
@@ -50,5 +50,5 @@ do
     esac
 done
 
-
+sudo mergecap -w mergedCapture.pcap eth*.pcap 
 
